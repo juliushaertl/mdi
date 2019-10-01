@@ -18,7 +18,7 @@
           :index-name="indexName"
           :search-client="searchClient"
         >
-          <ais-configure :hits-per-page.camel="1000" />
+          <ais-configure :hits-per-page.camel="100" />
           <ais-search-box>
             <div slot-scope="{ currentRefinement, isSearchStalled, refine }">
               <v-layout align-center>
