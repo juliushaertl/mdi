@@ -9,15 +9,15 @@
   },
   "dependencies": {
     "@mdi/font": "^4.4.95",
-    "algoliasearch": "^3.33.0",
+    "algoliasearch": "^3.35.0",
     "core-js": "^2.6.5",
     "roboto-fontface": "*",
     "v-tooltip": "^2.0.2",
     "vue": "^2.6.10",
-    "vue-clipboard2": "^0.3.0",
-    "vue-instantsearch": "^2.3.0",
+    "vue-clipboard2": "^0.3.1",
+    "vue-instantsearch": "^2.5.0",
     "vue-toasted": "^1.1.27",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.0.20"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
@@ -26,10 +26,10 @@
     "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "prettier": "^1.18.2",
-    "sass": "^1.17.4",
+    "sass": "^1.22.12",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.6.3",
     "vue-template-compiler": "^2.6.10",
