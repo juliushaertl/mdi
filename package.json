@@ -12,6 +12,7 @@
     "algoliasearch": "^3.33.0",
     "core-js": "^2.6.5",
     "roboto-fontface": "*",
+    "v-tooltip": "^2.0.2",
     "vue": "^2.6.10",
     "vue-clipboard2": "^0.3.0",
     "vue-instantsearch": "^2.3.0",

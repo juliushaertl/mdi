@@ -7,6 +7,9 @@ import InstantSearch from "vue-instantsearch";
 import VueClipboard from "vue-clipboard2";
 import Toasted from "vue-toasted";
 
+import VTooltip from "v-tooltip";
+
+Vue.use(VTooltip);
 Vue.use(Toasted);
 Vue.use(VueClipboard);
 Vue.use(InstantSearch);
