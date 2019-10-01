@@ -7,6 +7,9 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <a href="https://materialdesignicons.com/" target="blank">v4.4.95</a>
+      <v-btn href="https://github.com/ThomasKientz/mdi" icon>
+        <v-icon>mdi-github-circle</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-content>
