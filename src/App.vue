@@ -5,6 +5,8 @@
         <span>MDI</span>
         <span class="font-weight-light">SEARCH</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <a href="https://materialdesignicons.com/" target="blank">v4.4.95</a>
     </v-app-bar>
 
     <v-content>
@@ -81,7 +83,7 @@ export default {
       process.env.VUE_APP_ALGOLIA_APP_ID,
       process.env.VUE_APP_ALGOLIA_API_KEY
     ),
-    indexName: process.env.VUE_APP_ALGOLIA_INDEX
+    indexName: "MDI 4.4.95"
   }),
 
   methods: {
