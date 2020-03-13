@@ -119,7 +119,6 @@ export default {
         return localStorage.getItem("darkMode") !== "false";
       },
       set(v) {
-        console.log("set darkMode", v);
         localStorage.setItem("darkMode", v);
         this.$vuetify.theme.dark = v;
       }
