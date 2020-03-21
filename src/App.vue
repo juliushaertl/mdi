@@ -11,13 +11,48 @@
         <span class="font-weight-light">SEARCH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-switch v-model="darkMode" hide-details label="Dark"></v-switch>
-      <a class="ml-3" href="https://materialdesignicons.com/" target="blank"
-        >v5.0.45</a
-      >
+
+      <v-menu v-model="menu" :close-on-content-click="false" offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-cog</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-list-item-action>
+                <v-switch v-model="darkMode" hide-details></v-switch>
+              </v-list-item-action>
+              <v-list-item-title>Dark mode</v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-subheader>Name format</v-subheader>
+            <v-list-item>
+              <v-radio-group hide-details class="mt-0" v-model="format">
+                <v-radio label="account-circle" value="basic"></v-radio>
+                <v-radio label="accountCircle" value="camelCase"></v-radio>
+                <v-radio
+                  label="mdiAccountCircle"
+                  value="camelCasePrefixed"
+                ></v-radio>
+                <v-radio label="mdi-account-circle" value="prefixed"></v-radio>
+              </v-radio-group>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
+
       <v-btn href="https://github.com/ThomasKientz/mdi" icon>
         <v-icon>mdi-github</v-icon>
       </v-btn>
+
+      <a class="ml-3" href="https://materialdesignicons.com/" target="blank"
+        >MDI 5.0.45</a
+      >
     </v-app-bar>
 
     <v-content>
@@ -52,8 +87,7 @@
                 <template v-slot:activator="{ on }">
                   <v-btn
                     v-on="on"
-                    v-clipboard="item.name"
-                    v-clipboard:success="onCopy"
+                    @click="copy(item.name)"
                     class="ma-4"
                     large
                     icon
@@ -102,7 +136,9 @@ export default {
       process.env.VUE_APP_ALGOLIA_API_KEY
     ),
     indexName: "MDI 5.0.45",
-    toastMessage: null
+    toastMessage: null,
+    menu: false,
+    format: localStorage.getItem("format") || "basic"
   }),
 
   computed: {
@@ -125,11 +161,36 @@ export default {
     }
   },
 
+  watch: {
+    format(v) {
+      localStorage.setItem("format", v);
+    }
+  },
+
   methods: {
-    onCopy(e) {
-      this.toastMessage = e.text;
+    copy(name) {
+      const formated =
+        this.format == "prefixed"
+          ? "mdi-" + name
+          : this.format == "camelCase"
+          ? toCamelCase(name)
+          : this.format == "camelCasePrefixed"
+          ? toCamelCase("mdi-" + name)
+          : name;
+
+      this.$copyText(formated).then(() => {
+        this.toastMessage = formated;
+      });
     }
   }
+};
+
+const toCamelCase = str => {
+  return str.split("-").reduce((res, string, index) => {
+    const text =
+      index > 0 ? string.charAt(0).toUpperCase() + string.slice(1) : string;
+    return res + text;
+  });
 };
 </script>
 
