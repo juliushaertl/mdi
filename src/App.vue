@@ -50,7 +50,11 @@
         <v-icon>mdi-github</v-icon>
       </v-btn>
 
-      <a class="ml-3" href="https://materialdesignicons.com/" target="blank"
+      <a
+        class="ml-3"
+        style="color: inherit;"
+        href="https://materialdesignicons.com/"
+        target="blank"
         >MDI 5.0.45</a
       >
     </v-app-bar>
