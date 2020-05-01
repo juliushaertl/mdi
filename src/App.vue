@@ -55,7 +55,7 @@
         style="color: inherit;"
         href="https://materialdesignicons.com/"
         target="blank"
-        >MDI 5.0.45</a
+        >MDI 5.1.45</a
       >
     </v-app-bar>
 
@@ -139,7 +139,7 @@ export default {
       process.env.VUE_APP_ALGOLIA_APP_ID,
       process.env.VUE_APP_ALGOLIA_API_KEY
     ),
-    indexName: "MDI 5.0.45",
+    indexName: "MDI",
     toastMessage: null,
     menu: false,
     format: localStorage.getItem("format") || "basic"

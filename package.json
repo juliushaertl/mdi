@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@mdi/font": "^5.0.45",
+    "@mdi/font": "^5.1.45",
     "algoliasearch": "^3.35.1",
     "core-js": "^3.6.4",
     "roboto-fontface": "*",
