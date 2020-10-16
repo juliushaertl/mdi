@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@mdi/font": "^5.7.55",
-    "algoliasearch": "^4.2.0",
+    "algoliasearch": "^4.5.1",
     "core-js": "^3.6.4",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
-    "vue-instantsearch": "^2.7.0",
+    "vue-instantsearch": "^3.4.2",
     "vuetify": "^2.2.17"
   },
   "devDependencies": {

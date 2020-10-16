@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-snackbar top color="success" :timeout="2000" v-model="toast">
-      <span class="font-weight-bold"> {{ toastMessage }}</span
-      ><span class="ml-2">copied to clipboard !</span>
+    <v-snackbar top color="success" :timeout="1600" v-model="toast">
+      <span>Copied to clipboard!</span>
+      <v-icon style="color: inherit;">mdi-clipboard-check</v-icon>
     </v-snackbar>
 
     <v-app-bar app>
@@ -71,7 +71,7 @@
               <v-layout align-center>
                 <v-text-field
                   prepend-inner-icon="mdi-magnify"
-                  label="Search icon"
+                  label="Search"
                   :value="currentRefinement"
                   @input="refine($event)"
                   :loading="isSearchStalled"
@@ -87,32 +87,28 @@
           </ais-search-box>
           <ais-hits>
             <v-row justify="space-between" slot-scope="{ items }" wrap>
-              <v-tooltip v-for="item in items" :key="item.objectID" bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    v-on="on"
-                    @click="copy(item.name)"
-                    class="ma-4"
-                    large
-                    icon
-                    text
-                  >
-                    <v-icon large>mdi-{{ item.name }}</v-icon>
-                  </v-btn>
-                </template>
-                <span>{{ item.name }}</span>
-              </v-tooltip>
-              <v-btn
-                disabled
-                v-for="n in 50"
-                :key="'placeholder-' + n"
-                class="ma-4"
-                large
-                icon
-                text
-              >
-                <v-icon class="ma-4" large></v-icon>
-              </v-btn>
+              <v-col v-for="item in items" :key="item.objectID">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      v-on="on"
+                      @click="copy(item.name)"
+                      class="ma-4"
+                      large
+                      icon
+                      text
+                    >
+                      <v-icon large>mdi-{{ item.name }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ item.name }}</span>
+                </v-tooltip>
+              </v-col>
+              <v-col v-for="n in 50" :key="'placeholder-' + n">
+                <v-btn disabled class="ma-4" large icon text>
+                  <v-icon class="ma-4" large></v-icon>
+                </v-btn>
+              </v-col>
             </v-row>
           </ais-hits>
           <ais-refinement-list attribute="brand" />
@@ -140,20 +136,12 @@ export default {
       process.env.VUE_APP_ALGOLIA_API_KEY
     ),
     indexName: "MDI",
-    toastMessage: null,
+    toast: false,
     menu: false,
     format: localStorage.getItem("format") || "basic",
   }),
 
   computed: {
-    toast: {
-      get() {
-        return !!this.toastMessage;
-      },
-      set(v) {
-        this.toastMessage = v;
-      },
-    },
     darkMode: {
       get() {
         return localStorage.getItem("darkMode") !== "false";
@@ -183,7 +171,7 @@ export default {
           : name;
 
       this.$copyText(formated).then(() => {
-        this.toastMessage = formated;
+        this.toast = true;
       });
     },
   },
