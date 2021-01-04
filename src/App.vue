@@ -55,7 +55,7 @@
         style="color: inherit;"
         href="https://materialdesignicons.com/"
         target="blank"
-        >MDI 5.7.55</a
+        >MDI {{ mdiVersion }}</a
       >
     </v-app-bar>
 
@@ -127,7 +127,7 @@ export default {
 
   components: {
     AisInstantSearch,
-    AisSearchBox,
+    AisSearchBox
   },
 
   data: () => ({
@@ -139,6 +139,7 @@ export default {
     toast: false,
     menu: false,
     format: localStorage.getItem("format") || "basic",
+    mdiVersion: process.env.VUE_APP_MDI_VERSION
   }),
 
   computed: {
@@ -149,14 +150,14 @@ export default {
       set(v) {
         localStorage.setItem("darkMode", v);
         this.$vuetify.theme.dark = v;
-      },
-    },
+      }
+    }
   },
 
   watch: {
     format(v) {
       localStorage.setItem("format", v);
-    },
+    }
   },
 
   methods: {
@@ -173,11 +174,11 @@ export default {
       this.$copyText(formated).then(() => {
         this.toast = true;
       });
-    },
-  },
+    }
+  }
 };
 
-const toCamelCase = (str) => {
+const toCamelCase = str => {
   return str.split("-").reduce((res, string, index) => {
     const text =
       index > 0 ? string.charAt(0).toUpperCase() + string.slice(1) : string;
