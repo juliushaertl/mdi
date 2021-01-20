@@ -40,6 +40,10 @@
                   label="mdiAccountCircle"
                   value="camelCasePrefixed"
                 ></v-radio>
+                <v-radio
+                  label="mdi:account-circle"
+                  value="colon:prefixed"
+                ></v-radio>
               </v-radio-group>
             </v-list-item>
           </v-list>
@@ -169,6 +173,8 @@ export default {
           ? toCamelCase(name)
           : this.format == "camelCasePrefixed"
           ? toCamelCase("mdi-" + name)
+          : this.format == "colon:prefixed"
+          ? "mdi:" + name
           : name;
 
       this.$copyText(formated).then(() => {
