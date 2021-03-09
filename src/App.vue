@@ -2,7 +2,9 @@
   <v-app>
     <v-snackbar top color="success" :timeout="1600" v-model="toast">
       <span>Copied to clipboard!</span>
-      <v-icon style="color: inherit;">mdi-clipboard-check</v-icon>
+      <template v-slot:action>
+        <v-icon style="color: inherit;">mdi-clipboard-check</v-icon>
+      </template>
     </v-snackbar>
 
     <v-app-bar app>
@@ -82,10 +84,9 @@
                   autofocus
                   clearable
                 />
-                <span class="mx-2 caption grey--text text--darken-1">
-                  Search by Algolia
-                </span>
-                <div class="algolia"></div>
+                <ais-powered-by
+                  :theme="$vuetify.theme.dark ? 'dark' : undefined"
+                />
               </v-layout>
             </div>
           </ais-search-box>
@@ -108,14 +109,43 @@
                   <span>{{ item.name }}</span>
                 </v-tooltip>
               </v-col>
-              <v-col v-for="n in 50" :key="'placeholder-' + n">
+              <v-col v-for="n in 10" :key="'placeholder-' + n">
                 <v-btn disabled class="ma-4" large icon text>
                   <v-icon class="ma-4" large></v-icon>
                 </v-btn>
               </v-col>
             </v-row>
           </ais-hits>
-          <ais-refinement-list attribute="brand" />
+          <ais-pagination>
+            <v-pagination
+              slot-scope="{
+                currentRefinement,
+                nbPages,
+                pages,
+                isFirstPage,
+                isLastPage,
+                refine
+              }"
+              :value="currentRefinement + 1"
+              @input="refine($event - 1)"
+              :length="nbPages"
+            />
+          </ais-pagination>
+          <ais-stats>
+            <p
+              class="body-2 text-center mt-3"
+              slot-scope="{
+                hitsPerPage,
+                nbPages,
+                nbHits,
+                page,
+                processingTimeMS
+              }"
+            >
+              {{ nbHits }} icons retrieved in {{ processingTimeMS }}ms. Limited
+              to 1000 results.
+            </p>
+          </ais-stats>
         </ais-instant-search>
       </v-container>
     </v-content>
@@ -123,7 +153,13 @@
 </template>
 
 <script>
-import { AisInstantSearch, AisSearchBox } from "vue-instantsearch";
+import {
+  AisInstantSearch,
+  AisSearchBox,
+  AisPagination,
+  AisPoweredBy,
+  AisStats
+} from "vue-instantsearch";
 import algoliasearch from "algoliasearch";
 
 export default {
@@ -131,7 +167,10 @@ export default {
 
   components: {
     AisInstantSearch,
-    AisSearchBox
+    AisSearchBox,
+    AisPagination,
+    AisPoweredBy,
+    AisStats
   },
 
   data: () => ({
@@ -192,11 +231,3 @@ const toCamelCase = str => {
   });
 };
 </script>
-
-<style lang="scss" scoped>
-.algolia {
-  width: 24px;
-  height: 24px;
-  background: url("./assets/algolia.svg");
-}
-</style>
