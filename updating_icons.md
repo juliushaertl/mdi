@@ -6,7 +6,7 @@
 
 https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/meta.json
 
-2. Clear records
+2. Clear Algolia index records
 
 - Go to Index, clear all records.
 - Add new records by uploading `meta.json`
